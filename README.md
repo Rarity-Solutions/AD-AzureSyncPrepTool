@@ -47,7 +47,7 @@ AD-AzureSyncPrepTool is a comprehensive PowerShell-based tool designed for manag
 
 1. **Run the Tool Manually:**
    - **Download and Extract:**
-     - Download the zip file from the [GitHub repository](https://github.com/xxxmtixxx/AD-AzureSyncPrepTool/archive/refs/heads/main.zip) and extract it to your desired location.
+     - Download the zip file from the [GitHub repository](https://github.com/Rarity-Solutions/AD-AzureSyncPrepTool/archive/refs/heads/main.zip) and extract it to your desired location.
    - **Start the GUI:**
      - Navigate to the `GUI` folder, right-click on `Initialize-GUI.ps1`, and select **Run with PowerShell**. The script will automatically ensure it runs with administrative privileges.
 
@@ -55,7 +55,7 @@ AD-AzureSyncPrepTool is a comprehensive PowerShell-based tool designed for manag
    - Run the following command in PowerShell to download and set up the module automatically:
 
      ```powershell
-     $documentsPath=[Environment]::GetFolderPath('MyDocuments');$url='https://github.com/xxxmtixxx/AD-AzureSyncPrepTool/archive/refs/heads/main.zip';$moduleName='AD-AzureSyncPrepTool';$modulePath=Join-Path $documentsPath 'WindowsPowerShell\Modules';$tempPath=Join-Path $env:TEMP ($moduleName+'.zip');Invoke-WebRequest -Uri $url -OutFile $tempPath;$tempDir='.'+$moduleName+'_temp';$extractPath=Join-Path $HOME $tempDir;Expand-Archive -Path $tempPath -DestinationPath $extractPath -Force;$sourceFolder=Join-Path $extractPath 'AD-AzureSyncPrepTool-main';$destinationFolder=Join-Path $modulePath $moduleName;if (!(Test-Path $destinationFolder)) {New-Item -Path $destinationFolder -ItemType Directory | Out-Null};Copy-Item -Path "$sourceFolder\*" -Destination $destinationFolder -Recurse -Force;Remove-Item $tempPath, $extractPath -Recurse -Force
+     $documentsPath=[Environment]::GetFolderPath('MyDocuments');$url='https://github.com/Rarity-Solutions/AD-AzureSyncPrepTool/archive/refs/heads/main.zip';$moduleName='AD-AzureSyncPrepTool';$modulePath=Join-Path $documentsPath 'WindowsPowerShell\Modules';$tempPath=Join-Path $env:TEMP ($moduleName+'.zip');if (!(Get-Module -ListAvailable -Name ExchangeOnlineManagement)) {Install-Module -Name ExchangeOnlineManagement -Force -AllowClobber -Scope CurrentUser};Invoke-WebRequest -Uri $url -OutFile $tempPath;$tempDir='.'+$moduleName+'_temp';$extractPath=Join-Path $HOME $tempDir;Expand-Archive -Path $tempPath -DestinationPath $extractPath -Force;$sourceFolder=Join-Path $extractPath 'AD-AzureSyncPrepTool-main';$destinationFolder=Join-Path $modulePath $moduleName;if (!(Test-Path $destinationFolder)) {New-Item -Path $destinationFolder -ItemType Directory | Out-Null};Copy-Item -Path "$sourceFolder\*" -Destination $destinationFolder -Recurse -Force;Remove-Item $tempPath -Force -ErrorAction SilentlyContinue;if (Test-Path $extractPath) {Remove-Item (Get-Item $extractPath).FullName -Recurse -Force -ErrorAction SilentlyContinue}
      ```
 
    - **Import the Module:**
@@ -90,3 +90,4 @@ AD-AzureSyncPrepTool is a comprehensive PowerShell-based tool designed for manag
 ### Conclusion
 
 The AD-AzureSyncPrepTool is a powerful solution for IT administrators needing precise control over user synchronization between AD and Azure AD. Whether managing individual users, performing bulk updates via CSV, or ensuring that cloud attributes are preserved before federating with Azure AD Connect, the tool's intuitive interface and robust feature set make it an invaluable asset for maintaining data integrity across environments.
+
