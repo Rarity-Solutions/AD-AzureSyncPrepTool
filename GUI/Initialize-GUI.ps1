@@ -338,7 +338,7 @@ function Refresh-GUIData {
 # Initialize the form
 $form = New-Object System.Windows.Forms.Form
 $form.Text = "AD-AzureSyncPrepTool"
-$form.Size = New-Object System.Drawing.Size(1300, 800) # Adjust these values to change the form width and height
+$form.Size = New-Object System.Drawing.Size(1300, 850) # Adjust these values to change the form width and height
 $form.StartPosition = 'CenterScreen'
 
 # Lock the form size and disable maximize button
